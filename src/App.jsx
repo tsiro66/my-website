@@ -130,7 +130,10 @@ const App = () => {
 
   return (
     <>    
-      <NavigationShapes scrollContainer={containerRef} currentSection={currentSection} />
+    <div className="hidden lg:block">
+  <NavigationShapes scrollContainer={containerRef} currentSection={currentSection} />
+</div>
+
       <div
         ref={containerRef}
         className="h-screen overflow-y-auto focus:outline-none"
