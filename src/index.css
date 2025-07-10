@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* --- Initial State (Before Scroll) --- */
+
+/* The nav dots are invisible and not clickable */
+.navigation-dots {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The header elements are invisible */
+.header-element {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+
+/* --- Final State (After Scroll - when body has .nav-visible) --- */
+
+/* The hero balls become invisible */
+.nav-visible .hero-balls {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The nav dots become visible */
+.nav-visible .navigation-dots {
+  opacity: 1;
+  pointer-events: auto;
+}
