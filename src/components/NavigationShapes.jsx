@@ -186,21 +186,21 @@ const NavigationShapes = ({ scrollContainer }) => {
     <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-50">
       <div
         ref={sphere1}
-        className="absolute right-[25%] top-[20%] w-64 h-64 rounded-full overflow-hidden z-10"
+        className="absolute right-[15%] top-[20%] w-64 h-64 rounded-full overflow-hidden z-10"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-purple-700 shadow-2xl shadow-purple-500/50" />
       </div>
 
       <div
         ref={sphere2}
-        className="absolute right-[30%] top-[35%] w-96 h-96 rounded-full overflow-hidden z-20"
+        className="absolute right-[20%] top-[35%] w-96 h-96 rounded-full overflow-hidden z-20"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-pink-400 to-fuchsia-600 shadow-2xl shadow-pink-500/50" />
       </div>
 
       <div
         ref={sphere3}
-        className="absolute right-[22%] top-[50%] w-48 h-48 rounded-full overflow-hidden z-30"
+        className="absolute right-[12%] top-[50%] w-48 h-48 rounded-full overflow-hidden z-30"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-amber-600 shadow-2xl shadow-yellow-500/50" />
       </div>
