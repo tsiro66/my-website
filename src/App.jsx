@@ -4,6 +4,7 @@ import AboutSection from "./components/AboutSection";
 import ContactSection from "./components/ContactSection";
 import FooterSection from "./components/FooterSection";
 import NavigationShapes from "./components/NavigationShapes";
+import MobileNavbar from "./components/MobileNavbar";
 
 const App = () => {
   const containerRef = useRef(null);
@@ -130,6 +131,7 @@ const App = () => {
 
   return (
     <>    
+    <MobileNavbar />
     <div className="hidden lg:block">
   <NavigationShapes scrollContainer={containerRef} currentSection={currentSection} />
 </div>

@@ -55,7 +55,7 @@ const FooterSection = () => {
       {/* Footer bottom */}
       <div className="border-t border-gray-900 py-8">
         <div className="container mx-auto px-12 md:px-20 lg:px-32 xl:px-40">
-          <div className="flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+          <div className="flex flex-col md:flex-row justify-between items-center text-center text-gray-500 text-sm">
             <p>© {currentYear} Θοδωρής Τσιρώνης. Όλα τα δικαιώματα κατοχυρωμένα.</p>
             <p className="mt-4 md:mt-0">Σχεδιασμένο με ❤️ και React</p>
           </div>
