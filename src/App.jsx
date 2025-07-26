@@ -143,10 +143,10 @@ const App = () => {
           overscrollBehavior: 'contain'
         }}
       >
-        <HeroSection className="h-screen snap-start" />
-        <AboutSection className="h-screen snap-start" />
-        <ContactSection className="h-screen snap-start" />
-        <FooterSection className="h-screen snap-start" />
+        <HeroSection />
+        <AboutSection />
+        <ContactSection />
+        <FooterSection />
       </div>
     </>
   );
