@@ -9,6 +9,7 @@ export const useNavigationShapesAnimation = ({
   scrollContainer,
   currentSectionRef,
   applyRhombusTransformation,
+  updateDotsPosition, // New callback to track dots position
 }) => {
   const floatingTl = useRef(null);
   const scrollTriggerRef = useRef(null);
@@ -103,31 +104,26 @@ export const useNavigationShapesAnimation = ({
             floatingTl.current?.pause();
             gsap.killTweensOf([s1, s2, s3]);
 
-            const isAbout = currentSectionRef.current === 1;
+            // Animate to dots position
             gsap.to(s1, {
               ...finalPos.sphere1,
               duration: 0.4,
-              ease: "power2.inOut",
-              onStart: isAbout
-                ? () => {
-                    const inner = s1.querySelector(".shape-inner");
-                    gsap.to(inner, {
-                      rotation: 45,
-                      borderRadius: "10%",
-                      duration: 0.3,
-                      ease: "power2.inOut"
-                    });
-                  }
-                : undefined
+              ease: "power2.inOut"
             });
-            gsap.to(s2, { ...finalPos.sphere2, duration: 0.4, ease: "power2.inOut" });
+            gsap.to(s2, { 
+              ...finalPos.sphere2, 
+              duration: 0.4, 
+              ease: "power2.inOut" 
+            });
             gsap.to(s3, {
               ...finalPos.sphere3,
               duration: 0.4,
               ease: "power2.inOut",
               onComplete: () => {
                 state.current.isInDotsPosition = true;
-                if (!isAbout) applyRhombusTransformation(currentSectionRef.current);
+                if (updateDotsPosition) updateDotsPosition(true);
+                // Apply rhombus transformation after reaching dots position
+                applyRhombusTransformation(currentSectionRef.current);
               }
             });
 
@@ -135,15 +131,10 @@ export const useNavigationShapesAnimation = ({
             state.current.isAnimatingToSpheres = true;
             state.current.isAnimatingToDots = false;
             state.current.isInDotsPosition = false;
+            if (updateDotsPosition) updateDotsPosition(false);
 
-            const spheres = [s1, s2, s3];
-            spheres.forEach(sphere => {
-              const inner = sphere.querySelector(".shape-inner");
-              gsap.set(inner, { rotation: 0, borderRadius: "50%" });
-            });
-
-            gsap.killTweensOf(spheres);
-            gsap.to(spheres, {
+            gsap.killTweensOf([s1, s2, s3]);
+            gsap.to([s1, s2, s3], {
               x: 0,
               y: 0,
               scale: 1,
@@ -157,7 +148,12 @@ export const useNavigationShapesAnimation = ({
           } else {
             state.current.isAnimatingToDots = false;
             state.current.isAnimatingToSpheres = false;
-            state.current.isInDotsPosition = false;
+            
+            // Only update dots position state if we're transitioning
+            if (state.current.isInDotsPosition && progress < 0.99) {
+              state.current.isInDotsPosition = false;
+              if (updateDotsPosition) updateDotsPosition(false);
+            }
 
             floatingTl.current?.pause();
             gsap.killTweensOf([s1, s2, s3]);
