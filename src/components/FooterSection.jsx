@@ -1,32 +1,34 @@
 const FooterSection = ({ onContactClick }) => {
   return (
     <section className="min-h-screen bg-black flex items-center justify-center snap-start relative overflow-hidden">
-      {/* Subtle animated gradient orbs */}
-      <div className="absolute top-1/3 left-1/3 transform -translate-x-1/6 -translate-y-1/6 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute  top-1/2 right-1/4 w-64 h-64 bg-pink-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+      {/* Subtle animated gradient orbs - responsive sizing */}
+      <div className="absolute top-20 md:top-1/5 left-10 md:left-1/6 transform -translate-x-1/6 -translate-y-1/6 w-48 md:w-96 h-48 md:h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute top-2/3 right-10 md:right-1/5 w-32 md:w-64 h-32 md:h-64 bg-pink-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Main CTA */}
-          <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+          <div className="text-center mb-16 md:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 px-2 sm:px-0">
               Έτοιμος να ξεκινήσουμε;
             </h2>
-            <p className="text-xl md:text-2xl text-gray-400 mb-10">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-400 mb-8 md:mb-10 px-4 sm:px-0">
               Ας μετατρέψουμε την ιδέα σου σε πραγματικότητα
             </p>
             
-            {/* Simple CTA Button */}
-            <button
-              onClick={onContactClick}
-              className="inline-block px-8 py-4 border border-white/20  text-white font-medium hover:bg-white hover:text-black transition-all duration-300"
-            >
-              Επικοινώνησε Μαζί Μου
-            </button>
+            {/* CTA Button with golden glow - yellow bg on mobile */}
+            <div className="inline-block drop-shadow-[0_0_40px_rgba(250,204,21,0.6)]">
+              <button
+                onClick={onContactClick}
+                className="px-6 sm:px-8 py-3 sm:py-4 border border-yellow-500 bg-yellow-500 text-black md:bg-transparent md:border-white md:text-white md:hover:bg-yellow-500 md:hover:border-yellow-500 md:hover:text-black transition-all duration-300 font-medium text-sm sm:text-base"
+              >
+                Επικοινώνησε μαζί μου
+              </button>
+            </div>
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-wrap justify-center gap-8 text-gray-400 mb-16 sm:mb-0">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 text-gray-400 sm:mb-16 md:mb-0 text-sm sm:text-base">
             <a href="https://github.com/tsiro66" target="_blank" rel="noopener noreferrer" 
                className="hover:text-white transition-colors duration-300 flex items-center gap-2">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -41,7 +43,7 @@ const FooterSection = ({ onContactClick }) => {
               </svg>
               LinkedIn
             </a>
-            <a href="mailto:tsiro.thodoris@gmail.com" className="hover:text-white transition-colors duration-300">
+            <a href="mailto:tsiro.thodoris@gmail.com" className="hover:text-white transition-colors duration-300 break-all text-center">
               tsiro.thodoris@gmail.com
             </a>
             <a href="tel:+306987828639" className="hover:text-white transition-colors duration-300">
@@ -52,7 +54,7 @@ const FooterSection = ({ onContactClick }) => {
       </div>
 
       {/* Minimal copyright */}
-      <div className="absolute bottom-8 left-0 right-0 text-center text-gray-600 text-sm">
+      <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 text-center text-gray-600 text-xs sm:text-sm px-4">
         © {new Date().getFullYear()} Θοδωρής Τσιρώνης
       </div>
     </section>

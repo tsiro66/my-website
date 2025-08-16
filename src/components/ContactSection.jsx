@@ -38,38 +38,26 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="min-h-screen bg-black flex items-center justify-center snap-start relative overflow-hidden py-16 md:py-0">
-      {/* Subtle animated gradient orbs - matching hero and footer */}
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/3 left-1/4 w-64 h-64 bg-pink-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+      {/* Subtle animated gradient orbs - responsive sizing */}
+      <div className="absolute top-20 md:top-1/3 right-10 md:right-1/4 w-48 md:w-96 h-48 md:h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 md:bottom-1/3 left-10 md:left-1/4 w-32 md:w-64 h-32 md:h-64 bg-pink-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 relative z-10">
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
             {/* Left side - Contact Info */}
             <div className="text-center lg:text-left">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6">
                 Επικοινωνία
               </h2>
-              <p className="text-lg md:text-xl text-gray-400 mb-10">
+              <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 md:mb-10 px-4 sm:px-0">
                 Ας συζητήσουμε το επόμενό σου project
               </p>
               
-              <div className="space-y-6 max-w-sm mx-auto lg:mx-0">
-                <div className="flex items-start space-x-4">
-                  <span className="text-gray-400">Email:</span>
-                  <a href="mailto:tsiro.thodoris@gmail.com" className="text-white hover:text-gray-300 transition-colors">
-                    tsiro.thodoris@gmail.com
-                  </a>
-                </div>
+              <div className="space-y-4 md:space-y-6 max-w-md mx-5 lg:mx-0 text-sm sm:text-base">
+               
                 
-                <div className="flex items-start space-x-4">
-                  <span className="text-gray-400">Τηλέφωνο:</span>
-                  <a href="tel:+306987828639" className="text-white hover:text-gray-300 transition-colors">
-                     698 782 8639
-                  </a>
-                </div>
-                
-                <div className="flex items-start space-x-4">
+                <div className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-4">
                   <span className="text-gray-400">Διαθεσιμότητα:</span>
                   <span className="text-white">Δευτέρα - Κυριακή</span>
                 </div>
@@ -77,8 +65,8 @@ const ContactSection = () => {
             </div>
             
             {/* Right side - Contact Form */}
-            <div className="border border-white/10 rounded-lg p-6 sm:p-8 md:p-10">
-              <div className="space-y-6">
+            <div className="border border-white/10 rounded-lg p-4 sm:p-6 md:p-8 lg:p-10">
+              <div className="space-y-4 md:space-y-6">
                 <div>
                   <label className="block text-gray-400 text-sm mb-2">
                     Όνομα
@@ -87,7 +75,7 @@ const ContactSection = () => {
                     type="text"
                     value={formData.name}
                     onChange={(e) => handleChange('name', e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-white/20 rounded text-white placeholder-gray-500 focus:outline-none focus:border-white/40 transition-colors"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-transparent border border-white/20 rounded text-white placeholder-gray-500 focus:outline-none focus:border-pink-500/60 transition-colors text-sm sm:text-base"
                     placeholder="Το όνομά σου"
                   />
                 </div>
@@ -100,7 +88,7 @@ const ContactSection = () => {
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleChange('email', e.target.value)}
-                    className="w-full px-4 py-3 bg-transparent border border-white/20 rounded text-white placeholder-gray-500 focus:outline-none focus:border-white/40 transition-colors"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-transparent border border-white/20 rounded text-white placeholder-gray-500 focus:outline-none focus:border-pink-500/60 transition-colors text-sm sm:text-base"
                     placeholder="you@example.com"
                   />
                 </div>
@@ -113,16 +101,17 @@ const ContactSection = () => {
                     value={formData.message}
                     onChange={(e) => handleChange('message', e.target.value)}
                     rows="4"
-                    className="w-full px-4 py-3 bg-transparent border border-white/20 rounded text-white placeholder-gray-500 focus:outline-none focus:border-white/40 transition-colors resize-none"
-                    placeholder="Πείτε μας για το project σου..."
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-transparent border border-white/20 rounded text-white placeholder-gray-500 focus:outline-none focus:border-pink-500/60 transition-colors resize-none text-sm sm:text-base"
+                    placeholder="Πες μου για το project σου..."
                   />
                 </div>
                 
-                <button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="w-full px-8 py-4 border border-white/20 rounded text-white font-medium hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50"
-                >
+                <div className="drop-shadow-[0_0_40px_rgba(236,72,153,0.8)]">
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                    className="w-full px-6 sm:px-8 py-3 sm:py-4 border border-pink-500 bg-pink-500 text-white md:text-black font-medium md:bg-transparent md:border-white md:text-white md:hover:bg-pink-500 md:hover:text-black md:hover:border-pink-500 transition-all duration-300 disabled:opacity-50 text-sm sm:text-base"
+                  >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
                       <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -135,10 +124,10 @@ const ContactSection = () => {
                     'Αποστολή Μηνύματος'
                   )}
                 </button>
-                
+                </div>
                 {submitStatus === 'success' && (
-                  <div className="mt-4 p-4 border border-green-500/30 rounded">
-                    <p className="text-green-400 text-center">
+                  <div className="mt-4 p-3 sm:p-4 border border-green-500/30 rounded">
+                    <p className="text-green-400 text-center text-sm sm:text-base">
                       ✓ Το μήνυμά σου στάλθηκε επιτυχώς!
                     </p>
                   </div>
