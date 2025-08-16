@@ -38,7 +38,7 @@ const MobileNavbar = () => {
       }`}>
         <div className="flex items-center justify-between h-full px-6">
           {/* Original Logo Spheres */}
-          <div className="relative w-12 h-12">
+          <div className="relative w-10 h-10">
             <div className="drop-shadow-[0_0_8px_rgba(236,72,153,0.8)]">
               <div className="absolute w-6 h-6 rounded-full bg-gradient-to-br from-pink-400 to-fuchsia-600 top-2 left-0 z-10" />
             </div>
