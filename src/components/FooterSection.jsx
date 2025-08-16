@@ -55,7 +55,7 @@ const FooterSection = ({ onContactClick }) => {
 
       {/* Minimal copyright */}
       <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 text-center text-gray-600 text-xs sm:text-sm px-4">
-        © {new Date().getFullYear()} Θοδωρής Τσιρώνης
+        © {new Date().getFullYear()} Θοδωρής Τσιρώνης | All rights reserved
       </div>
     </section>
   );
