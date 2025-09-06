@@ -59,7 +59,9 @@ const HeroSection = ({ className, isMobile, onContactClick }) => {
             <div className="drop-shadow-[0_0_40px_rgba(168,85,247)]">
               <button
                 onClick={onContactClick}
-                className="px-6 sm:px-8 py-3 sm:py-4 border border-purple-500 bg-purple-500 text-white font-medium lg:bg-transparent lg:border-white lg:hover:bg-purple-500 lg:hover:text-black md:hover:border-purple-500 transition-all text-sm sm:text-base"
+                className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-purple-500 bg-purple-500
+                 text-white font-medium lg:bg-transparent lg:border-white lg:hover:bg-purple-500
+                  md:hover:border-purple-500 transition-all duration-300 text-sm sm:text-base cursor-pointer"
               >
                 Επικοινώνησε μαζί μου
               </button>

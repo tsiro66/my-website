@@ -3,6 +3,7 @@ import gsap from "gsap";
 
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
+import PortfolioSection from "./components/PortfolioSection"; // New import
 import ContactSection from "./components/ContactSection";
 import FooterSection from "./components/FooterSection";
 import NavigationShapes from "./components/NavigationShapes";
@@ -178,11 +179,16 @@ const App = () => {
           <AboutSection onContactClick={() => scrollToSectionById("contact-wrapper")} />
         </div>
 
-        <div id="contact-wrapper" ref={(el) => (sectionRefs.current[2] = el)}>
+        {/* NEW: Portfolio Section */}
+        <div id="portfolio-wrapper" ref={(el) => (sectionRefs.current[2] = el)}>
+          <PortfolioSection onContactClick={() => scrollToSectionById("contact-wrapper")}/>
+        </div>
+
+        <div id="contact-wrapper" ref={(el) => (sectionRefs.current[3] = el)}>
           <ContactSection />
         </div>
 
-        <div id="footer-wrapper" ref={(el) => (sectionRefs.current[3] = el)}>
+        <div id="footer-wrapper" ref={(el) => (sectionRefs.current[4] = el)}>
           <FooterSection onContactClick={() => scrollToSectionById("contact-wrapper")} />
         </div>
       </div>

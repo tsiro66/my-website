@@ -20,7 +20,9 @@ const FooterSection = ({ onContactClick }) => {
             <div className="inline-block drop-shadow-[0_0_40px_rgba(250,204,21,0.6)]">
               <button
                 onClick={onContactClick}
-                className="px-6 sm:px-8 py-3 sm:py-4 border border-yellow-500 bg-yellow-500 text-black md:bg-transparent md:border-white md:text-white md:hover:bg-yellow-500 md:hover:border-yellow-500 md:hover:text-black transition-all duration-300 font-medium text-sm sm:text-base"
+                className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-yellow-500/20 bg-yellow-500/90 text-white md:bg-transparent
+                 md:border-white md:text-white md:hover:bg-yellow-500/90 md:hover:border-yellow-500/20 transition-all 
+                 duration-300 font-medium text-sm sm:text-base cursor-pointer"
               >
                 Επικοινώνησε μαζί μου
               </button>
@@ -43,10 +45,18 @@ const FooterSection = ({ onContactClick }) => {
               </svg>
               LinkedIn
             </a>
-            <a href="mailto:tsiro.thodoris@gmail.com" className="hover:text-white transition-colors duration-300 break-all text-center">
+            <a href="mailto:tsiro.thodoris@gmail.com" 
+               className="hover:text-white transition-colors duration-300 flex items-center gap-2">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
               tsiro.thodoris@gmail.com
             </a>
-            <a href="tel:+306987828639" className="hover:text-white transition-colors duration-300">
+            <a href="tel:+306987828639" 
+               className="hover:text-white transition-colors duration-300 flex items-center gap-2">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
               +30 698 782 8639
             </a>
           </div>
@@ -54,7 +64,7 @@ const FooterSection = ({ onContactClick }) => {
       </div>
 
       {/* Minimal copyright */}
-      <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 text-center text-gray-600 text-xs sm:text-sm px-4">
+      <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 text-center text-gray-400 text-xs sm:text-sm px-4">
         © {new Date().getFullYear()} Θοδωρής Τσιρώνης | All rights reserved
       </div>
     </section>

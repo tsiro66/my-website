@@ -9,7 +9,7 @@ export const useNavigationShapesAnimation = ({
   scrollContainer,
   currentSectionRef,
   applyRhombusTransformation,
-  updateDotsPosition, // New callback to track dots position
+  updateDotsPosition,
 }) => {
   const floatingTl = useRef(null);
   const scrollTriggerRef = useRef(null);
@@ -17,43 +17,45 @@ export const useNavigationShapesAnimation = ({
     isAnimatingToDots: false,
     isAnimatingToSpheres: false,
     lastProgress: -1,
-    isInDotsPosition: false
+    isInDotsPosition: false,
+    isInitialized: false,
+    entranceComplete: false
   });
 
   useEffect(() => {
     if (!scrollContainer.current) return;
 
     const [s1, s2, s3] = sphereRefs.map(ref => ref.current);
+    
+    // Ensure all spheres exist
+    if (!s1 || !s2 || !s3) {
+      console.warn("NavigationShapes: Sphere refs not ready");
+      return;
+    }
 
-    // Initial sphere setup
+    // Kill any existing animations first
+    gsap.killTweensOf([s1, s2, s3]);
+    if (floatingTl.current) {
+      floatingTl.current.kill();
+      floatingTl.current = null;
+    }
+    if (scrollTriggerRef.current) {
+      scrollTriggerRef.current.kill();
+      scrollTriggerRef.current = null;
+    }
+
+    // Initial sphere setup - ensure they're visible but scaled down
     gsap.set([s1, s2, s3], {
       scale: 0,
-      opacity: 0,
+      opacity: 1, // Changed from 0 to 1 to ensure visibility
       force3D: true,
       x: 0,
       y: 0,
-      willChange: "transform"
+      willChange: "transform",
+      visibility: "visible" // Ensure visibility
     });
 
-    const entranceTl = gsap.timeline({ defaults: { ease: "back.out(1.7)" } });
-    entranceTl
-      .to(s2, { scale: 1, opacity: 1, duration: 0.8, ease: "elastic.out(1, 0.5)" })
-      .to(s1, { scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1, 0.6)" }, "-=0.4")
-      .to(s3, { scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1, 0.6)" }, "-=0.4");
-
-    // Create floating animation (sinusoidal)
-    const startFloating = () => {
-      if (floatingTl.current) floatingTl.current.kill();
-      const tl = gsap.timeline({ repeat: -1, yoyo: true });
-
-      tl.to(s1, { x: 20, y: 10, duration: 3, ease: "sine.inOut" }, 0);
-      tl.to(s2, { x: -25, y: -20, duration: 4, ease: "sine.inOut" }, 0);
-      tl.to(s3, { x: 15, y: 25, duration: 3.5, ease: "sine.inOut" }, 0);
-
-      floatingTl.current = tl;
-    };
-
-    // Pre-calculate target final positions only once
+    // Pre-calculate target final positions
     const calculateFinalPositions = () => {
       const finalRight = window.innerWidth * 0.9;
       const baseY = 500;
@@ -80,10 +82,23 @@ export const useNavigationShapesAnimation = ({
       };
     };
 
-    entranceTl.eventCallback("onComplete", () => {
-      const finalPos = calculateFinalPositions();
-      startFloating();
+    // Create floating animation
+    const startFloating = () => {
+      if (!state.current.entranceComplete) return;
+      if (floatingTl.current) floatingTl.current.kill();
+      
+      const tl = gsap.timeline({ repeat: -1, yoyo: true });
+      tl.to(s1, { x: 20, y: 10, duration: 3, ease: "sine.inOut" }, 0);
+      tl.to(s2, { x: -25, y: -20, duration: 4, ease: "sine.inOut" }, 0);
+      tl.to(s3, { x: 15, y: 25, duration: 3.5, ease: "sine.inOut" }, 0);
+      
+      floatingTl.current = tl;
+    };
 
+    // Setup scroll trigger BEFORE entrance animation
+    const setupScrollTrigger = () => {
+      const finalPos = calculateFinalPositions();
+      
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: "#hero",
         start: "top top",
@@ -92,37 +107,48 @@ export const useNavigationShapesAnimation = ({
         scrub: true,
         onUpdate: (self) => {
           const progress = self.progress;
-          if (Math.abs(progress - state.current.lastProgress) < 0.01) return;
-
+          
+          // Skip tiny changes
+          if (Math.abs(progress - state.current.lastProgress) < 0.001) return;
           state.current.lastProgress = progress;
 
           const ease = gsap.parseEase("power2.inOut")(progress);
 
+          // Handle dots position (end of scroll)
           if (progress >= 0.99 && !state.current.isAnimatingToDots) {
             state.current.isAnimatingToDots = true;
             state.current.isAnimatingToSpheres = false;
-            floatingTl.current?.pause();
+            
+            if (floatingTl.current) {
+              floatingTl.current.pause();
+              floatingTl.current.progress(0);
+            }
+            
             gsap.killTweensOf([s1, s2, s3]);
 
-            // Animate to dots position
+            // Ensure spheres are visible before animating to dots
+            gsap.set([s1, s2, s3], { opacity: 1, visibility: "visible" });
+            
             gsap.to(s1, {
               ...finalPos.sphere1,
+              opacity: 1,
               duration: 0.4,
               ease: "power2.inOut"
             });
             gsap.to(s2, { 
-              ...finalPos.sphere2, 
+              ...finalPos.sphere2,
+              opacity: 1, 
               duration: 0.4, 
               ease: "power2.inOut" 
             });
             gsap.to(s3, {
               ...finalPos.sphere3,
+              opacity: 1,
               duration: 0.4,
               ease: "power2.inOut",
               onComplete: () => {
                 state.current.isInDotsPosition = true;
                 if (updateDotsPosition) updateDotsPosition(true);
-                // Apply rhombus transformation after reaching dots position
                 applyRhombusTransformation(currentSectionRef.current);
               }
             });
@@ -131,6 +157,7 @@ export const useNavigationShapesAnimation = ({
             state.current.isAnimatingToSpheres = true;
             state.current.isAnimatingToDots = false;
             state.current.isInDotsPosition = false;
+            
             if (updateDotsPosition) updateDotsPosition(false);
 
             gsap.killTweensOf([s1, s2, s3]);
@@ -138,49 +165,105 @@ export const useNavigationShapesAnimation = ({
               x: 0,
               y: 0,
               scale: 1,
+              opacity: 1,
               duration: 0.5,
               ease: "power2.out",
               onComplete: () => {
-                if (self.progress <= 0.01) startFloating();
+                if (self.progress <= 0.01 && state.current.entranceComplete) {
+                  startFloating();
+                }
               }
             });
 
-          } else {
+          } else if (progress > 0.01 && progress < 0.99) {
+            // Middle of scroll
             state.current.isAnimatingToDots = false;
             state.current.isAnimatingToSpheres = false;
             
-            // Only update dots position state if we're transitioning
-            if (state.current.isInDotsPosition && progress < 0.99) {
+            if (state.current.isInDotsPosition) {
               state.current.isInDotsPosition = false;
               if (updateDotsPosition) updateDotsPosition(false);
             }
 
-            floatingTl.current?.pause();
+            if (floatingTl.current) {
+              floatingTl.current.pause();
+              floatingTl.current.progress(0);
+            }
+            
             gsap.killTweensOf([s1, s2, s3]);
 
+            // Ensure visibility and set positions
             gsap.set(s1, {
               x: finalPos.sphere1.x * ease,
               y: finalPos.sphere1.y * ease,
-              scale: 1 - (1 - finalPos.sphere1.scale) * ease
+              scale: 1 - (1 - finalPos.sphere1.scale) * ease,
+              opacity: 1,
+              visibility: "visible"
             });
             gsap.set(s2, {
               x: finalPos.sphere2.x * ease,
               y: finalPos.sphere2.y * ease,
-              scale: 1 - (1 - finalPos.sphere2.scale) * ease
+              scale: 1 - (1 - finalPos.sphere2.scale) * ease,
+              opacity: 1,
+              visibility: "visible"
             });
             gsap.set(s3, {
               x: finalPos.sphere3.x * ease,
               y: finalPos.sphere3.y * ease,
-              scale: 1 - (1 - finalPos.sphere3.scale) * ease
+              scale: 1 - (1 - finalPos.sphere3.scale) * ease,
+              opacity: 1,
+              visibility: "visible"
             });
           }
         }
       });
-    });
+    };
+
+    // Check initial scroll position
+    const checkInitialPosition = () => {
+      const scrollTop = scrollContainer.current.scrollTop;
+      const heroHeight = document.querySelector("#hero")?.offsetHeight || window.innerHeight;
+      const scrollProgress = Math.min(scrollTop / heroHeight, 1);
+      
+      if (scrollProgress > 0.01) {
+        // We're already scrolled, skip entrance animation
+        state.current.entranceComplete = true;
+        gsap.set([s1, s2, s3], { scale: 1, opacity: 1 });
+        setupScrollTrigger();
+        
+        // Trigger immediate update
+        if (scrollTriggerRef.current) {
+          scrollTriggerRef.current.update();
+        }
+      } else {
+        // Do entrance animation
+        setupScrollTrigger();
+        
+        const entranceTl = gsap.timeline({ 
+          defaults: { ease: "back.out(1.7)" },
+          onComplete: () => {
+            state.current.entranceComplete = true;
+            startFloating();
+          }
+        });
+        
+        entranceTl
+          .to(s2, { scale: 1, opacity: 1, duration: 0.8, ease: "elastic.out(1, 0.5)" })
+          .to(s1, { scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1, 0.6)" }, "-=0.4")
+          .to(s3, { scale: 1, opacity: 1, duration: 0.6, ease: "elastic.out(1, 0.6)" }, "-=0.4");
+      }
+    };
+
+    // Initialize after a small delay to ensure DOM is ready
+    const initTimer = setTimeout(() => {
+      state.current.isInitialized = true;
+      checkInitialPosition();
+    }, 10);
 
     return () => {
-      floatingTl.current?.kill();
-      scrollTriggerRef.current?.kill();
+      clearTimeout(initTimer);
+      if (floatingTl.current) floatingTl.current.kill();
+      if (scrollTriggerRef.current) scrollTriggerRef.current.kill();
       gsap.killTweensOf([s1, s2, s3]);
     };
   }, [scrollContainer]);

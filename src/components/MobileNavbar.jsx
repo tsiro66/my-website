@@ -25,6 +25,7 @@ const MobileNavbar = () => {
   const menuItems = [
     { id: "hero", label: "Αρχική" },
     { id: "about", label: "Σχετικά" },
+    { id: "portfolio", label: "Η δουλειά μου" },
     { id: "contact", label: "Επικοινωνία" },
   ];
 
@@ -128,12 +129,11 @@ const MobileNavbar = () => {
           <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-800">
             <div className="space-y-4">
               <div className="flex items-center justify-center drop-shadow-[0_0_40px_rgba(168,85,247)]">
-              <button
-                className="px-6 py-3 sm:py-4 border border-purple-500 bg-purple-500 text-white font-medium text-sm"
-              >
-                Πάρε με τηλέφωνο!
-              </button>
-            </div>
+                <a href="tel:+306987828639" 
+                className="px-6 py-3 sm:py-4 border border-purple-500 bg-purple-500 text-white font-medium text-sm">
+                  Πάρε με τηλέφωνο!
+                </a>
+              </div>
               
               {/* Social Links */}
               <div className="flex items-center justify-center space-x-6 pt-2">
@@ -161,7 +161,7 @@ const MobileNavbar = () => {
                   href="mailto:tsiro.thodoris@gmail.com"
                   className="text-gray-400 hover:text-white transition-colors duration-200"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </a>

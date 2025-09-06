@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AboutSection = ({onContactClick}) => {
-  const skills = ['React', 'TypeScript', 'Node.js', 'Next.js', 'Tailwind CSS', 'Gsap'];
+  const skills = ['React', 'Tailwind', 'Node.js', 'Next.js', 'Tailwind CSS', 'Gsap'];
 
   return (
     <section id="about" className="min-h-screen bg-black flex items-center justify-center snap-start relative overflow-hidden py-16 md:py-0">
@@ -29,7 +29,8 @@ const AboutSection = ({onContactClick}) => {
               {/* Minimal CTA */}
               <button
                 onClick={onContactClick}
-                className="inline-flex items-center text-white hover:text-purple-400 transition-colors group text-sm sm:text-base"
+                className="inline-flex items-center text-white hover:text-purple-400 transition-colors group text-sm sm:text-base
+                 cursor-pointer"
               >
                 <span className="mr-2">Ας συνεργαστούμε</span>
                 <svg className="w-4 sm:w-5 h-4 sm:h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
