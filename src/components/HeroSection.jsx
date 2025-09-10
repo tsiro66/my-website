@@ -40,7 +40,7 @@ const HeroSection = ({ className, isMobile, onContactClick }) => {
           }`}
         >
           <div>
-            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white">
+            <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold text-white">
               Θοδωρής<br />
               Τσιρώνης
             </h1>

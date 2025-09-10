@@ -3,6 +3,19 @@ import { useState, useEffect } from 'react';
 const PortfolioSection = ({ onContactClick }) => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [visibleCards, setVisibleCards] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Portfolio items with progress percentages
   const portfolioItems = [
@@ -57,6 +70,16 @@ const PortfolioSection = ({ onContactClick }) => {
     if (item.isContact && onContactClick) {
       onContactClick();
     }
+  };
+
+  // Determine if progress bar should be shown
+  const shouldShowProgress = (itemId, index) => {
+    // On mobile, always show after card is visible
+    if (isMobile) {
+      return visibleCards.includes(index);
+    }
+    // On desktop, show on hover
+    return hoveredCard === itemId;
   };
 
   return (
@@ -125,8 +148,8 @@ const PortfolioSection = ({ onContactClick }) => {
                       <div 
                         className={`absolute inset-y-0 left-0 ${getProgressColor(item.progress)} transition-all duration-1000 ease-out rounded-full`}
                         style={{ 
-                          width: hoveredCard === item.id ? `${item.progress}%` : '0%',
-                          transitionDelay: hoveredCard === item.id ? '100ms' : '0ms'
+                          width: shouldShowProgress(item.id, index) ? `${item.progress}%` : '0%',
+                          transitionDelay: shouldShowProgress(item.id, index) ? '100ms' : '0ms'
                         }}
                       >
                         {/* Animated glow effect */}
