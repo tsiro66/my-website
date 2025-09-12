@@ -9,7 +9,7 @@ const FooterSection = ({ onContactClick }) => {
         <div className="max-w-4xl mx-auto">
           {/* Main CTA */}
           <div className="text-center mb-16 md:mb-20">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 px-2 sm:px-0">
+            <h2 className="play text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 px-2 sm:px-0">
               Έτοιμος να ξεκινήσουμε;
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-400 mb-8 md:mb-10 px-4 sm:px-0">

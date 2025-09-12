@@ -92,7 +92,7 @@ const PortfolioSection = ({ onContactClick }) => {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
+            <h2 className="play text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
               Η δουλειά μου
             </h2>
             <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4 sm:px-0">
@@ -116,7 +116,7 @@ const PortfolioSection = ({ onContactClick }) => {
               >
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                  <h3 className="play text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
                     {item.title}
                   </h3>
                   

@@ -89,7 +89,7 @@ const MobileNavbar = () => {
           {/* Menu Header */}
           <div className="px-6 py-3 border-b border-gray-800">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-white">Μενού</h2>
+              <h2 className="play text-xl font-semibold text-white">Μενού</h2>
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"

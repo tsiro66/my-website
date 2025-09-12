@@ -40,14 +40,14 @@ const HeroSection = ({ className, isMobile, onContactClick }) => {
           }`}
         >
           <div>
-            <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold text-white">
+            <h1 className="play text-5xl sm:text-6xl lg:text-[5.5rem] font-bold text-white">
               Θοδωρής<br />
               Τσιρώνης
             </h1>
           </div>
 
           <div className="mt-6 md:pl-2 flex flex-col items-center text-center lg:items-start lg:text-left">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-400 mb-4 md:mb-6 font-light">
+            <h2 className="jura text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-400 mb-4 md:mb-6 font-light">
               Web Developer
             </h2>
 

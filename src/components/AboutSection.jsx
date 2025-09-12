@@ -15,7 +15,7 @@ const AboutSection = ({onContactClick}) => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left side - Text content */}
             <div className="text-center lg:text-left">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
+              <h2 className="play text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
                 Σχετικά
               </h2>
               <p className="text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed mb-4 md:mb-6 px-4 sm:px-0">
