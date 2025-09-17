@@ -21,7 +21,7 @@ const PortfolioSection = ({ onContactClick }) => {
   const portfolioItems = [
     {
       id: 1,
-      title: "Προσωπική ιστοσελίδα",
+      title: "Iστοσελίδα για σύμβουλο SEO",
       description: "Δημιουργία ενός σύγχρονου one-page portfolio για τον σύμβουλο SEO Μιχάλη Ζαργιανάκη.",
       technologies: ["React", "Tailwind"],
       progress: 100,
