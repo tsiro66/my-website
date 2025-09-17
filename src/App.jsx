@@ -167,7 +167,7 @@ const App = () => {
       {/* main scroll container */}
       <div
         ref={containerRef}
-        className="h-screen overflow-y-auto focus:outline-none"
+        className="h-screen overflow-y-auto focus:outline-none no-scrollbar"
         style={{ overscrollBehavior: "contain" }}
       >
         {/* wrappers MUST be direct children of container so offsetTop is relative to container */}
